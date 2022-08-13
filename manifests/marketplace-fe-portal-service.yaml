@@ -7,9 +7,9 @@ metadata:
   namespace: frontend
 spec:
   ports:
-  - port: 5000
+  - port: 80
     protocol: TCP
-    targetPort: 5000
+    targetPort: 80
     nodePort: 32122
   selector:
     app: portal
