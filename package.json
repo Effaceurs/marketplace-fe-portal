@@ -6,7 +6,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "generate": "ng g c"
+    "generate": "ng g c",
+    "build": "ng build"
   },
   "author": "",
   "license": "ISC",
