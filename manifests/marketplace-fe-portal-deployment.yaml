@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: portal
+  name: marketplace-fe-portal
+  namespace: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: portal
+    spec:
+      containers:
+      - image: 192.168.110.135:5000/portal:test
+        name: portal
