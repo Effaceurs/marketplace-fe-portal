@@ -4,5 +4,5 @@ resources:
 - marketplace-fe-portal-deployment.yaml
 - marketplace-fe-portal-namespace.yaml
 - marketplace-fe-portal-service.yaml
-namespace: backend
+namespace: frontend
 images:
