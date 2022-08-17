@@ -58,6 +58,7 @@ release:
 
 k8s_tests:
   stage: k8s_tests
+  allow_failure: true
   image: deck15/kubeval-tools:v2.7
   script:
     - kubeconform manifests/release/manifest.yaml
