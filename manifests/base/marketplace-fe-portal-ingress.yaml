@@ -1,0 +1,20 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-myservice
+  namespace: frontend
+spec:
+  rules:
+  - host: kubernetes.my.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: portal-nodeport-svc
+            port:
+              number: 80
+  ingressClassName: nginx
+

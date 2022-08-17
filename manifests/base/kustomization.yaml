@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
 - marketplace-fe-portal-deployment.yaml
 - marketplace-fe-portal-service.yaml
+- marketplace-fe-portal-ingress.yaml
 namespace: frontend
 images:
