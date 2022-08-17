@@ -35,7 +35,7 @@ spec:
         app: portal
     spec:
       containers:
-      - image: 192.168.110.135:5000/portal:aceb9e44
+      - image: 192.168.110.135:5000/portal:d5d89d26
         name: portal
         resources:
           limits:
