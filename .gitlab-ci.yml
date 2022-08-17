@@ -29,7 +29,7 @@ code_quality:
 
   script:
     - ls -ltr
-    - node node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx . models controller config
+    - node node_modules/eslint/bin/eslint.js --ext .js,.jsx,.ts,.tsx src/app/**/ src/app/shared/**/
 
 build:
   stage: build
