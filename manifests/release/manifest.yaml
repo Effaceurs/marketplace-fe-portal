@@ -35,7 +35,7 @@ spec:
         app: portal
     spec:
       containers:
-      - image: 192.168.110.135:5000/portal:a59fead3
+      - image: 192.168.110.135:5000/portal:62b9df1e
         name: portal
         resources:
           limits:
@@ -44,3 +44,22 @@ spec:
           requests:
             cpu: 10m
             memory: 32Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-myservice
+  namespace: frontend
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kubernetes.my.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: portal-nodeport-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
