@@ -20,6 +20,10 @@ export class SiteLayoutComponent implements AfterViewInit {
   ngAfterViewInit(): void {
   }
 
+  displayName(){
+    return localStorage.getItem("name");
+ }
+
   logout(event: Event) {
     event.preventDefault();
     this.auth.logout();

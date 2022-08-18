@@ -26,6 +26,7 @@ export class AuthService {
         tap(
           ({token}) => {
             localStorage.setItem('auth-token', token)
+            localStorage.setItem('name', (JSON.parse(atob(token.split('.')[1]))).email)
             this.setToken(token)
           }
         )

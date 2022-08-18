@@ -23,6 +23,21 @@
     </div>
     <div class="input-field">
       <input
+        formControlName="name"
+        id="name"
+        type="email"
+        [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+      >
+      <label for="name">Name:</label>
+      <span
+        class="helper-text red-text"
+        *ngIf="form.get('name').invalid && form.get('name').touched"
+      >
+        <span *ngIf="form.get('name').errors['required']">Name should not be empty</span>
+      </span>
+    </div>
+    <div class="input-field">
+      <input
         id="password"
         type="password"
         formControlName="password"
