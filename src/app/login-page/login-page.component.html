@@ -28,7 +28,7 @@
         formControlName="password"
         [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
       >
-      <label for="password">Пароль:</label>
+      <label for="password">Password:</label>
       <span
         class="helper-text red-text"
         *ngIf="form.get('password').invalid && form.get('password').touched"

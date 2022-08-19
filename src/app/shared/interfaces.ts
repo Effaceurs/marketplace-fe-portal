@@ -14,6 +14,12 @@ export interface AppVersion {
   provider: Provider
 }
 
+export interface Project {
+  name: string,
+  owner: string,
+  members: string[]
+}
+
 
 export interface Catalogue {
   name: string,
@@ -21,7 +27,8 @@ export interface Catalogue {
   version: string,
   _id?: string,
   provider: string,
-  replicas: number
+  replicas: number,
+  project: string
 }
 
 export interface Application {
@@ -34,5 +41,6 @@ export interface Application {
   formattedDate: string,
   url: string,
   user: string,
-  status: string
+  status: string,
+  project: string
 }

@@ -27,6 +27,7 @@ export class AuthService {
           ({token}) => {
             localStorage.setItem('auth-token', token)
             localStorage.setItem('name', (JSON.parse(atob(token.split('.')[1]))).email)
+            localStorage.setItem('userid', (JSON.parse(atob(token.split('.')[1]))).userId)
             this.setToken(token)
           }
         )

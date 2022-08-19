@@ -3,8 +3,9 @@ import { ProviderService } from "../shared/services/provider.service";
 import { ApplicationService } from "../shared/services/application.service";
 import { CatalogueService } from "../shared/services/catalogue.service";
 import { AppVersionService } from "../shared/services/appVersion.service";
+import { ProjectService } from "../shared/services/project.service";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {AppVersion, Catalogue, Provider} from '../shared/interfaces'
+import {AppVersion, Project, Catalogue, Provider} from '../shared/interfaces'
 import { MaterialService } from "../shared/classes/material.service"
 import {FormControl, Validators} from '@angular/forms';
 
@@ -66,12 +67,16 @@ export class CatalogueNewDeploy implements OnInit  {
   provider: string;
   version: string;
   name: string;
+  projects: Project[] = [];
+  project: string;
   versionFormControl = new FormControl('', [Validators.required]);
+  projectFormControl = new FormControl('', [Validators.required]);
   replicaFormControl = new FormControl('', [Validators.required]);
   nameFormControl = new FormControl('', [Validators.required]);
 
 
   constructor(
+    private ProjectService: ProjectService,
     private AppVersionService: AppVersionService,
     public dialogRef: MatDialogRef<CatalogueNewDeploy>,
     private applicationService: ApplicationService,
@@ -82,6 +87,7 @@ export class CatalogueNewDeploy implements OnInit  {
     this.data.name = this.name.toLowerCase().replaceAll(' ','')
     this.data.version = this.version.toLowerCase()
     this.data.replicas = this.replicas
+    this.data.project = this.project
     console.log(this.data)
 
     const answer = this.applicationService.add(this.data).subscribe(response => {
@@ -112,6 +118,10 @@ export class CatalogueNewDeploy implements OnInit  {
     this.AppVersionService.get(this.image, this.provider).subscribe(result => {
       this.appVersion = result
     })
+    this.ProjectService.get(localStorage.getItem("userid")).subscribe(result => {
+      this.projects = result
+    })
+    console.log('proj', this.projects)
 }
 }
 

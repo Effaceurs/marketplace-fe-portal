@@ -14,7 +14,14 @@
   </button>
 </mat-toolbar>
 
-<table mat-table [dataSource]="applications" class="mat-elevation-z8" matSort>
+<a *ngFor="let item of fetchedProjects">
+  <br>
+  Project: {{item.name}}
+  <br>
+  Project Owner: {{item.owner}}
+
+
+<table  mat-table [dataSource]="filter(item._id)" class="mat-elevation-z8" matSort>
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>name</th>
     <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -109,3 +116,4 @@
     *matRowDef="let row; columns: displayedColumns"
   ></tr>
 </table>
+</a>

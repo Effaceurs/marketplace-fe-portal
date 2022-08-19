@@ -14,8 +14,8 @@ export class ApplicationService {
     return this.http.post<Application>('/api/application/', application)
   }
 
-  fetch(): Observable<Application[]> {
-    return this.http.get<Application[]>('/api/application')
+  fetch(id: string): Observable<Application[]> {
+    return this.http.get<Application[]>('/api/application', { params: {id}})
   }
 
   deploy(application: Application): Observable<any>  {

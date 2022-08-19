@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { ApplicationService } from "../shared/services/application.service";
-import { Application } from "../shared/interfaces";
+import { Application, Project } from "../shared/interfaces";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MaterialService } from "../shared/classes/material.service"
+import { ProjectService } from "../shared/services/project.service";
 
 
 @Component({
@@ -12,10 +13,15 @@ import { MaterialService } from "../shared/classes/material.service"
 })
 export class MyAppsComponent implements OnInit {
   applications: Application[] = [];
+  projects = Set[''];
+  filteredProjects = Set[''];
   loading = false;
   clickedRows = new Set<Application>();
+  fetchedProjects: Project[] = []
+
 
   constructor(private applicationService: ApplicationService,
+    private projectService: ProjectService,
     public dialog: MatDialog) {
   }
 
@@ -32,12 +38,14 @@ export class MyAppsComponent implements OnInit {
   }
 
   refresh() {
+    this.applications = []
+    this.fetchedProjects = []
     this.clickedRows.clear()
     this.fetch()
   }
 
   fetch() {
-    this.applicationService.fetch().subscribe(
+    this.applicationService.fetch(localStorage.getItem("userid")).subscribe(
       (result) => {
         console.log(result);
         let i = 0
@@ -48,11 +56,28 @@ export class MyAppsComponent implements OnInit {
           i++
         }
         this.applications = result;
+        this.projects = new Set(this.applications.map(value => value.project))
+        for (const each of this.projects) {
+          this.projectService.fetchProject(each).subscribe(
+            (result) => {
+              this.fetchedProjects.push(result)
+            }
+          ),
+          (err) => {
+            console.log(err);
+          }
+        }
+        console.log(this.fetchedProjects)
       },
       (err) => {
         console.log(err);
       }
     );
+
+  }
+
+  filter(item) {
+    return this.applications.filter(value => value.project === item)
   }
 
   delete() {

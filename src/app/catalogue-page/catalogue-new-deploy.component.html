@@ -25,6 +25,17 @@
   </mat-button-toggle-group>
   <br />
   <br />
+  <p>Project</p>
+
+  <mat-button-toggle-group
+    [formControl]="projectFormControl"
+    [(ngModel)]="project"
+    aria-label="Font Style"
+  >
+    <mat-button-toggle *ngFor="let item of projects" value={{item._id}}>{{item.name}} - {{item.owner}}</mat-button-toggle>
+  </mat-button-toggle-group>
+  <br />
+  <br />
   <p>Replicas</p>
   <mat-button-toggle-group
     [formControl]="replicaFormControl"
