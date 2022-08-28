@@ -47,7 +47,6 @@ export class MyAppsComponent implements OnInit {
   fetch() {
     this.applicationService.fetch(localStorage.getItem("userid")).subscribe(
       (result) => {
-        console.log(result);
         let i = 0
         for (let item of result) { 
           result[i].formattedDate = item.date.toLocaleString().
@@ -61,13 +60,14 @@ export class MyAppsComponent implements OnInit {
           this.projectService.fetchProject(each).subscribe(
             (result) => {
               this.fetchedProjects.push(result)
+              this.fetchedProjects.sort((a, b) => a.name.localeCompare(b.name))
             }
           ),
           (err) => {
             console.log(err);
           }
         }
-        console.log(this.fetchedProjects)
+        return this.fetchedProjects
       },
       (err) => {
         console.log(err);
@@ -131,7 +131,6 @@ export class MyAppsDelete {
       item.url = ''
       this.applicationService.delete(item._id, item).subscribe(response => {
         MaterialService.toast(`Deletion of item with ID: ${item._id} has started`)
-        console.log(response)
       }, err => {
         console.log(err)
         MaterialService.toast(`Something went wrong`)

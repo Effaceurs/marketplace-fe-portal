@@ -21,7 +21,7 @@ export class SiteLayoutComponent implements AfterViewInit {
   }
 
   displayName(){
-    return localStorage.getItem("name");
+    return localStorage.getItem("name") ;
  }
 
   logout(event: Event) {
